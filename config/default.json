@@ -1,0 +1,18 @@
+{
+  "czujduchConf": {
+    "db": {
+        "host": "localhost",
+        "database": "czujduch",
+        "user": "root",
+        "password": "",
+        "dialect": "mysql",
+        "max": 5,
+        "min": 0,
+        "idle": 10000
+    },
+    "applications":{
+        "host": "localhost",
+        "port": 3000
+    }
+  }
+}

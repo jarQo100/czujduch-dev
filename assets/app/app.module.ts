@@ -13,6 +13,7 @@ import { NavbarComponent } from './content/navbar/navbar.component';
 import { MenuComponent } from './content/menu/menu.component';
 import { AuthService } from './auth/auth.service';
 import { DashboardComponent } from './content/dashboard/dashboard.component';
+import { LogoutComponent } from './auth/logout.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { DashboardComponent } from './content/dashboard/dashboard.component';
     ContentComponent,
     NavbarComponent,
     MenuComponent,
-    DashboardComponent
+    DashboardComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

@@ -2,11 +2,7 @@ import { Injectable } from "@angular/core";
 import { Http, Headers, Response } from "@angular/http";
 import 'rxjs/Rx';
 import { Observable } from "rxjs";
-
 import { User } from "./user.model";
-// import config = require('config');
-
-// var applicationConfig = config.get('czujduchConf.application');
 
 @Injectable()
 export class AuthService {

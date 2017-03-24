@@ -38,8 +38,6 @@ router.post('/signin', function(req, res, next) {
                     error: {message: 'Invalid login credentials'}
                 });
             }
-            console.log(req.body.password);
-            console.log(user.password);
             //Sprawdzamy czy zgadzają się hasła podane przez użytkownika
             var result = bcrypt.compareSync(req.body.password, user.password);
             if (!result) {

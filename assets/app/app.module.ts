@@ -9,11 +9,12 @@ import { SignInComponent } from './auth/sign-in.component';
 import { SignUpComponent } from './auth/sign-up.component';
 import { AuthComponent } from './auth/auth.component';
 import { ContentComponent } from './content/content.component';
-import { NavbarComponent } from './content/navbar/navbar.component';
-import { MenuComponent } from './content/menu/menu.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { MenuComponent } from './shared/menu/menu.component';
 import { AuthService } from './auth/auth.service';
 import { DashboardComponent } from './content/dashboard/dashboard.component';
 import { LogoutComponent } from './auth/logout.component';
+import { StopnieComponent } from './content/stopnie/stopnie.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { LogoutComponent } from './auth/logout.component';
     NavbarComponent,
     MenuComponent,
     DashboardComponent,
-    LogoutComponent
+    LogoutComponent,
+    StopnieComponent
   ],
   imports: [
     BrowserModule,

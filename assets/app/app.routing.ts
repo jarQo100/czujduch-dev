@@ -9,7 +9,7 @@ import { CONTENT_ROUTES } from "./content/content.routes";
 const APP_ROUTES: Routes = [
     { path: '', redirectTo: '/', pathMatch: 'full' },
     { path: 'auth', component: AuthComponent, children: AUTH_ROUTES },
-    { path: 'content', component: ContentComponent, children: CONTENT_ROUTES }
+    { path: 'panel', component: ContentComponent, children: CONTENT_ROUTES }
 ];
 
 export const routing = RouterModule.forRoot(APP_ROUTES);

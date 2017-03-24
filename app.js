@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 
 var appRoutes = require('./routes/app');
 var authRoutes = require('./routes/auth');
-
+var contentRoutes = require('./routes/content');
 
 var databaseConnection = require('./models/index');
 //var auth = require('./models/users');
@@ -37,6 +37,7 @@ app.use(function (req, res, next) {
 
 app.use('/', appRoutes);
 app.use('/auth', authRoutes);
+app.use('/content', authRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

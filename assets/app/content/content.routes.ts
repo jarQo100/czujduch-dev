@@ -2,9 +2,11 @@ import { Routes } from "@angular/router";
 
 
 import { DashboardComponent } from "./dashboard/dashboard.component";
+import { StopnieComponent } from './stopnie/stopnie.component';
 
 export const CONTENT_ROUTES: Routes = [
-    //{ path: '', redirectTo: 'signin', pathMatch: 'full' },
-    { path: '', component: DashboardComponent }
+
+    { path: '', component: DashboardComponent },
+    { path: 'stopnie', component: StopnieComponent }
     
 ];

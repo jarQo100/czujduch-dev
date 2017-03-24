@@ -14964,9 +14964,9 @@ form.dropzone {
 
 .indicator-item-value {
   -webkit-box-flex: 0;
-  -webkit-flex: 0 1 50%;
-      -ms-flex: 0 1 50%;
-          flex: 0 1 50%;
+  -webkit-flex: 0 1 80%;
+      -ms-flex: 0 1 80%;
+          flex: 0 1 80%;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -15673,3 +15673,8 @@ form.dropzone {
 
 .week-chart.widget.widget-fullwidth .widget-head {
   margin-bottom: 3rem; }
+
+.project-item-actions span.btn{
+    padding: 4px;
+    cursor: pointer;
+}

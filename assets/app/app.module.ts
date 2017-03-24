@@ -9,12 +9,14 @@ import { SignInComponent } from './auth/sign-in.component';
 import { SignUpComponent } from './auth/sign-up.component';
 import { AuthComponent } from './auth/auth.component';
 import { ContentComponent } from './content/content.component';
-import { NavbarComponent } from './content/navbar/navbar.component';
-import { MenuComponent } from './content/menu/menu.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { MenuComponent } from './shared/menu/menu.component';
 import { AuthService } from './auth/auth.service';
 import { DashboardComponent } from './content/dashboard/dashboard.component';
 import { LogoutComponent } from './auth/logout.component';
-
+import { StopnieComponent } from './content/stopnie/stopnie.component';
+import { AddStopienComponent } from './content/stopnie/add/add.component';
+import { StopnieService } from './content/stopnie/stopnie.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { LogoutComponent } from './auth/logout.component';
     NavbarComponent,
     MenuComponent,
     DashboardComponent,
-    LogoutComponent
+    LogoutComponent,
+    StopnieComponent,
+    AddStopienComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,7 @@ import { LogoutComponent } from './auth/logout.component';
     routing,
     ReactiveFormsModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, StopnieService], 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

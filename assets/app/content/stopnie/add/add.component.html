@@ -1,0 +1,112 @@
+<div class="main-content container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading panel-heading-divider">Dodaj stopień<span class="panel-subtitle">W tym miejscu możesz dodać stopień zdobyty albo ten, który teraz zdobywasz</span></div>
+                <div class="panel-body">
+                    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label text-right">Nazwa stopnia</label>
+                            <div class="col-5">
+                                <select class="select2 select2-hidden-accessible form-control" formControlName="name" tabindex="-1" aria-hidden="true">
+                                    <option value="Młodzik">Młodzik</option>
+                                    <option value="Wywiadowca">Wywiadowca</option>
+                                    <option value="Ćwik">Ćwik</option>
+                                    <option value="Harcerz Orli">Harcerz Orli</option>
+                                    <option value="Harcerz Rzeczypospolitej">Harcerz Rzeczypospolitej</option>
+                                    <option value="Przewodnik">Przewodnik</option>
+                                    <option value="Podharcmistrz">Podharcmistrz</option>
+                                    <option value="Harcmistrz">Harcmistrz</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label text-right">Rodzaj stopnia</label>
+                            <div class="col-5">
+                                <select class="select2 select2-hidden-accessible form-control" formControlName="type" tabindex="-1" aria-hidden="true">
+                                    <option value="Harcerski">Harcerski</option>
+                                    <option value="Instruktorski">Instruktorski</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row mt-3">
+                            <label class="col-sm-4 col-form-label text-right">Stopień w trakcie realizacji?</label>
+                            <div class="col-sm-5 pt-2">
+                                <div class="switch-button switch-button-success">
+                                    <input formControlName="work" checked="" id="swt5" type="checkbox"><span>
+                                    <label for="swt5"></label></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--<div class="form-group row">
+                            <label class="col-sm-4 col-form-label text-right"></label>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label class="custom-control custom-radio">
+                                        <input type="radio" name="work" class="custom-control-input" value="true">
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">TAK</span>
+                                    </label>
+                                    <label class="custom-control custom-radio">
+                                        <input type="radio" name="work" class="custom-control-input" value="false" checked="">
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">NIE</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>-->
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label text-right">Rozkaz otwarcia</label>
+                            <div class="col-5">
+                                <input formControlName="commandBegin" placeholder="Podaj rozkaz" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label text-right">Data otwarcia</label>
+                            <div class="col-5">
+                                <input formControlName="dateBegin" data-mask="date" placeholder="DD/MM/YYYY" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label text-right">Rozkaz zamknięcia</label>
+                            <div class="col-5">
+                                <input formControlName="commandEnd" placeholder="Podaj rozkaz" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label text-right">Data zamknięcia</label>
+                            <div class="col-5">
+                                <input formControlName="dateEnd" data-mask="date" placeholder="DD/MM/YYYY" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label text-right">Opiekun próby</label>
+                            <div class="col-5">
+                                <input formControlName="guide" placeholder="Wpisz imię i nazwisko ten osoby" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label text-right">Kto nadał stopień</label>
+                            <div class="col-5">
+                                <input formControlName="whoGive" placeholder="Wpisz imię i nazwisko ten osoby" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label text-right">Twoje przemyślenia, podumowanie realizacji stopnia</label>
+                            <div class="col-5">
+                                <textarea formControlName="description" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-4"></div>
+                            <div class="col-lg-5 text-right">
+                                <button data-dismiss="modal" type="submit" class="btn btn-lg btn-primary btn-block">Dodaj</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

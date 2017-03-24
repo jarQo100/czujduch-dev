@@ -15,7 +15,7 @@ import { AuthService } from './auth/auth.service';
 import { DashboardComponent } from './content/dashboard/dashboard.component';
 import { LogoutComponent } from './auth/logout.component';
 import { StopnieComponent } from './content/stopnie/stopnie.component';
-
+import { AddStopienComponent } from './content/stopnie/add/add.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,8 @@ import { StopnieComponent } from './content/stopnie/stopnie.component';
     MenuComponent,
     DashboardComponent,
     LogoutComponent,
-    StopnieComponent
+    StopnieComponent,
+    AddStopienComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +38,7 @@ import { StopnieComponent } from './content/stopnie/stopnie.component';
     routing,
     ReactiveFormsModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService], 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

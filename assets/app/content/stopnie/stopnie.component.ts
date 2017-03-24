@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: '<stopnie>',
+    selector: 'stopnie',
     templateUrl: './stopnie.component.html'
 })
 export class StopnieComponent {

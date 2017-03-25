@@ -29,7 +29,7 @@ router.post('/', function (req, res, next) {
 });
 
 router.post('/signin', function(req, res, next) {
-    models.User.findOne({email: req.body.email}).then(
+    models.User.findOne({where: { email: req.body.email}}).then(
         user => {
             //Sprawdzamy czu user istnije
             if (!user) {

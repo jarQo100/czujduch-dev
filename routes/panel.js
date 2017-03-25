@@ -10,7 +10,9 @@ router.get('/', function (req, res, next) {
 
 });
 
-router.post('/add', function (req, res, next) {
+router.post('/add:token', function (req, res, next) {
+
+    var decoded = jwt.decode(req.params.token);
 
     var stopien = {
         name: req.body.name,
@@ -23,28 +25,64 @@ router.post('/add', function (req, res, next) {
         guide: req.body.guide,
         whoGive: req.body.whoGive,
         description: req.body.description,
-        userId: req.body.userId
+        userId: decoded.user.id,
+        id: req.body.id
     };
 
-    var decoded = jwt.decode(req.query.token);
-    models.User.findOne({ userId: req.params.userId }).then(
+
+
+    models.User.findOne({ where: { id: decoded.user.id } }).then(
+
         () => {
-            models.Stopien.create(stopien).then(
-                result => {
-                    res.status(201).json({
-                        message: 'Added stopien to database',
-                        obj: result
-                    })
-                },
-                err => {
-                    res.status(500).json({
-                        title: 'An error occurred',
-                        error: err
-                    })
+            models.Stopien.findOne({
+                where: {
+                    id: req.body.id
                 }
-            );
+            }).then(function (obj) {
+                console.log(obj);
+                if (obj) { // update
+                    console.log("update");
+                    models.Stopien.update(stopien, { where: { id: req.body.id } }).then(
+                        result => {
+                            console.log("update");
+                            return res.status(201).json({
+                                message: 'Added stopien to database',
+                                obj: result
+                            })
+                        },
+                        err => {
+                            console.log("error update");
+                            return res.status(500).json({
+                                title: 'An error occurred',
+                                error: err
+                            })
+                        }
+                    );
+                }
+                else { // insert
+                    console.log("create");
+                    models.Stopien.create(stopien).then(
+                        result => {
+                            console.log("create");
+                            return res.status(201).json({
+                                message: 'Added stopien to database',
+                                obj: result
+                            })
+                        },
+
+                        err => {
+                            console.log("error create");
+                            return res.status(500).json({
+                                title: 'An error occurred',
+                                error: err
+                            });
+                        }
+                    );
+                }
+            });
         },
         (err) => {
+            console.log("not authorize");
             return res.status(401).json({
                 title: 'User not authorize',
                 error: err
@@ -53,14 +91,20 @@ router.post('/add', function (req, res, next) {
 
     );
 
-});
 
+});
 router.post('/list:token', function (req, res, next) {
     var decoded = jwt.decode(req.params.token);
-    models.User.findById(decoded.user.userId).then(
+    models.User.findOne({ where: { id: decoded.user.id } }).then(
         (result) => {
 
-            models.Stopien.findAll({ userId: decoded.user.userId, order: 'dateEnd DESC' }).then(
+            models.Stopien.findAll({
+                where: {
+                    userId: decoded.user.id
+                },
+                order: 'dateEnd DESC'
+            }
+            ).then(
                 data => {
                     res.status(201).json({
                         message: 'Data list from table stopnie for user',
@@ -73,7 +117,7 @@ router.post('/list:token', function (req, res, next) {
                         error: err
                     })
                 }
-            )
+                )
         },
         (err) => {
             return res.status(401).json({
@@ -85,39 +129,50 @@ router.post('/list:token', function (req, res, next) {
 
 });
 
-router.delete('/delete/:token/:id', function (req, res, next) {
+router.delete('/delete:token/:id', function (req, res, next) {
+
+    console.log("ID ID ID ID");
+    console.log(req.params.id);
+    console.log("TOKEN");
+    console.log(req.params.token);
+
     var decoded = jwt.decode(req.params.token);
-    models.User.findById(decoded.user.userId).then(
+    models.User.findOne({
+        where: {
+            id: decoded.user.id
+        }
+    }).then(
         (result) => {
-            models.Stopien.findOne({ id: req.params.id, userId: decoded.user.userId }).then(
-                data => {
-                    data.destroy().then(
-                        () => {
-                            models.Stopien.findAll({ userId: decoded.user.userId, order: 'dateEnd DESC' }).then(
-                                data => {
-                                    return res.status(201).json({
-                                        message: 'Delete success',
-                                        obj: data
-                                    });
-                                }
-                            );
+            models.Stopien.destroy({
+                where: {
+                    id: req.params.id,
+                    userId: decoded.user.id
+                }
+            }).then(
+                () => {
+                    models.Stopien.findAll({
+                        where: {
+                            userId: decoded.user.id,
                         },
-                        err => {
-                            return res.status(401).json({
-                                message: 'Something went wrong',
-                                obj: err
+                        order: 'dateEnd DESC'
+                    }).then(
+                        data => {
+                            return res.status(201).json({
+                                message: 'Delete success',
+                                obj: data
                             });
                         }
-                    )
+                        );
                 },
                 err => {
                     return res.status(401).json({
-                        message: 'Didnt find any result in database',
+                        message: 'Something went wrong',
                         obj: err
                     });
                 }
-            );
+                );
         },
+
         err => {
             return res.status(401).json({
                 title: 'User not authorize',
@@ -126,6 +181,45 @@ router.delete('/delete/:token/:id', function (req, res, next) {
         }
 
     );
+        
+
+});
+
+router.post('/getStopienById:token', function (req, res, next) {
+    var decoded = jwt.decode(req.params.token);
+    models.User.findOne({
+        where: {
+            id: decoded.user.id
+        }
+    }).then(
+        (result) => {
+            models.Stopien.findOne({
+                where: {
+                    id: req.body.id,
+                    userId: decoded.user.id
+                }
+            }).then(
+                data => {
+                    res.status(201).json({
+                        message: 'Success - row from table',
+                        obj: data
+                    })
+                },
+                err => {
+                    res.status(500).json({
+                        title: 'An error occurred',
+                        error: err
+                    })
+                }
+                )
+        },
+        (err) => {
+            return res.status(401).json({
+                title: 'User not authorize',
+                error: err
+            });
+        }
+        );
 
 });
 

@@ -17,6 +17,11 @@ import { LogoutComponent } from './auth/logout.component';
 import { StopnieComponent } from './content/stopnie/stopnie.component';
 import { AddStopienComponent } from './content/stopnie/add/add.component';
 import { StopnieService } from './content/stopnie/stopnie.service';
+import { ModalService } from './shared/modal/modal.service';
+import { ModalComponent } from './shared/modal/modal.component';
+import { TopAlertComponent } from './shared/top-alert/topalert.component';
+import { TopAlertService } from './shared/top-alert/topalert.service';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +35,9 @@ import { StopnieService } from './content/stopnie/stopnie.service';
     DashboardComponent,
     LogoutComponent,
     StopnieComponent,
-    AddStopienComponent
+    AddStopienComponent,
+    ModalComponent,
+    TopAlertComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +46,7 @@ import { StopnieService } from './content/stopnie/stopnie.service';
     routing,
     ReactiveFormsModule,
   ],
-  providers: [AuthService, StopnieService], 
+  providers: [AuthService, StopnieService, ModalService, TopAlertService], 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

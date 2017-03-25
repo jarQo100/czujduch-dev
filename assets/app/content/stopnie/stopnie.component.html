@@ -1,9 +1,9 @@
-<div class="main-content container">
+<div class="main-content container" *ngIf="length">
     <div class="row">
         <div class="col-md-5">
             <div class="widget widget-fullwidth user-develop-chart">
                 <div class="widget-head">
-                    <div class="tools"><span class="icon s7-cloud-download"></span><span class="icon s7-refresh-2"></span></div><span class="title">Zdobywany stopień</span>
+                    <div class="tools"></div><span class="title">Zdobywany stopień</span>
                 </div>
                 <div *ngFor="let row of list">
                     <div *ngIf="!row.work">
@@ -20,7 +20,7 @@
                                     </tr>
                                     <tr>
                                         <td class="item">Data otwarcia:</td>
-                                        <td><a href="#">{{row.dateBegin}}</a></td>
+                                        <td><a href="#">{{row.dateBegin | date: 'dd.MM.yyyy'}}</a></td>
                                     </tr>
                                     <tr>
                                         <td class="item">Opiekun próby:</td>
@@ -33,42 +33,52 @@
                             </table>
                         </div>
                     </div>
+
                 </div>
+                
             </div>
         </div>
         <div class="col-md-7">
             <div class="widget-indicators">
-
                 <div *ngFor="let row of list">
                     <div class="indicator-item" *ngIf="row.work">
                         <div class="indicator-item-icon">
                             <div class="icon"><span class="s7-graph1"></span></div>
                         </div>
                         <div class="indicator-item-value"><span data-toggle="counter" data-end="36" class="indicator-value-counter">{{ row.name }}</span>
-                            <div class="indicator-value-title"> {{ row.commandEnd }} {{ row.dateEnd }} </div>
+                            <div class="indicator-value-title"> {{ row.commandEnd }} z dnia: {{ row.dateEnd | date: 'dd.MM.yyyy' }} </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
         <div class="col-md-12">
             <div class="project-list">
-                <div class="project-list-title">Stopnie harcerskie</div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="project-list-title">Stopnie harcerskie</div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-right">
+                            <a routerLink="./dodaj" class="btn btn-success ">Dodaj stopień</a>
+                        </div>
+                    </div>
+                </div>
+
                 <div *ngFor="let row of list">
                     <div class="project-item" *ngIf="row.type == 'Harcerski'">
                         <div class="project-item-title"><span class="name">{{row.name}}</span></div>
                         <div class="project-item-user">
                             <div class="user-avatar"></div>
-                            <div class="user-info"><span class="name">{{row.commandBegin}}</span><span class="position description">{{row.dateBegin}}</span></div>
+                            <div class="user-info"><span class="name">{{row.commandBegin}}</span><span class="position description">{{row.dateBegin | date: 'dd.MM.yyyy'}}</span></div>
                         </div>
-                        <div class="project-item-state"><span class="name">{{row.commandEnd}}</span><span class="description">{{row.dateEnd}}</span></div>
+                        <div class="project-item-state"><span class="name">{{row.commandEnd}}</span><span class="description">{{row.dateEnd | date: 'dd.MM.yyyy'}}</span></div>
                         <div class="project-item-date"><span class="date">{{row.guide}}</span><span class="time description">Opiekun</span></div>
                         <div class="project-item-date"><span class="date">{{row.whoGive}}</span><span class="time description">Osoba nadająca</span></div>
-                        
+
                         <div class="project-item-actions">
-                            <span class="btn btn-warning icon s7-edit"></span>
+                            <a [routerLink]="['./edytuj', row.id]" class="btn btn-warning icon s7-edit"></a>
                             <span (click)="delete(row)" class="btn btn-danger icon s7-close"></span>
                         </div>
                     </div>
@@ -76,30 +86,42 @@
 
             </div>
         </div>
+    </div>
 
-        <div class="col-md-12">
-            <div class="project-list">
-                <div class="project-list-title">Stopnie instruktorskie</div>
-                <div *ngFor="let row of list">
-                    <div class="project-item" *ngIf="row.type == 'Instruktorski'">
-                        <div class="project-item-title"><span class="name">{{row.name}}</span></div>
-                        <div class="project-item-user">
-                            <div class="user-avatar"></div>
-                            <div class="user-info"><span class="name">{{row.commandBegin}}</span><span class="position description">{{row.dateBegin}}</span></div>
-                        </div>
-                        <div class="project-item-state"><span class="name">{{row.commandEnd}}</span><span class="description">{{row.dateEnd}}</span></div>
-                        <div class="project-item-date"><span class="date">{{row.guide}}</span><span class="time description">Opiekun</span></div>
-                        <div class="project-item-date"><span class="date">{{row.whoGive}}</span><span class="time description">Osoba nadająca</span></div>
-                        
-                        <div class="project-item-actions">
-                            <span class="btn btn-warning icon s7-edit"></span>
-                            <span (click)="delete(row)" class="btn btn-danger icon s7-close"></span>
-                        </div>
-                    </div>
+
+    <div class="project-list">
+        <div class="project-list-title">Stopnie instruktorskie</div>
+        <div *ngFor="let row of list">
+            <div class="project-item" *ngIf="row.type == 'Instruktorski'">
+                <div class="project-item-title"><span class="name">{{row.name}}</span></div>
+                <div class="project-item-user">
+                    <div class="user-avatar"></div>
+                    <div class="user-info"><span class="name">{{row.commandBegin}}</span><span class="position description">{{row.dateBegin | date: 'dd.MM.yyyy'}}</span></div>
                 </div>
+                <div class="project-item-state"><span class="name">{{row.commandEnd}}</span><span class="description">{{row.dateEnd | date: 'dd.MM.yyyy'}}</span></div>
+                <div class="project-item-date"><span class="date">{{row.guide}}</span><span class="time description">Opiekun</span></div>
+                <div class="project-item-date"><span class="date">{{row.whoGive}}</span><span class="time description">Osoba nadająca</span></div>
 
+                <div class="project-item-actions">
+                    <a [routerLink]="['./edytuj', row.id]" class="btn btn-warning icon s7-edit"></a>
+                    <span (click)="delete(row)" class="btn btn-danger icon s7-close"></span>
+                </div>
             </div>
         </div>
 
+    </div>
+
+</div>
+
+<div class="main-content container" *ngIf="!length">
+    <div class="row">
+        <div class="col-md-6">
+            Atualnie nie posiadasz żadnego zdobytego stopnia ani nie realizujesz żadnej próby.
+        </div>
+        <div class="col-md-6">
+            <div class="text-right">
+                <a routerLink="./dodaj" class="btn btn-success ">Dodaj stopień</a>
+            </div>
+        </div>
     </div>
 </div>

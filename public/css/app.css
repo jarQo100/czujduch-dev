@@ -11878,7 +11878,7 @@ pre {
 .has-danger .col-form-label,
 .has-danger .form-check-label,
 .has-danger .custom-control {
-  color: #545454; }
+  color: #F45846; }
 
 .has-danger .custom-control-indicator {
   border-color: #F45846; }
@@ -12115,10 +12115,7 @@ input[type="checkbox"] {
 .modal-header {
   border: 0;
   padding: 19px;
-  -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
-      -ms-flex-pack: end;
-          justify-content: flex-end; }
+ }
   .modal-header h1, .modal-header h2, .modal-header h3, .modal-header h4, .modal-header h5, .modal-header h6 {
     display: block;
     margin: 0;
@@ -15677,4 +15674,11 @@ form.dropzone {
 .project-item-actions span.btn{
     padding: 4px;
     cursor: pointer;
+}
+.has-danger span{
+  color: red;
+  font-weight: bold;
+}
+.project-item-actions a.btn{
+  padding: 4px;
 }

@@ -13,14 +13,14 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING
         },
         dateBegin:{
-            type: DataTypes.TIME,
+            type: DataTypes.DATE,
             unique: true,   
         },
         commandBegin:{
             type: DataTypes.STRING
         },
         dateEnd:{
-            type: DataTypes.TIME
+            type: DataTypes.DATE
         },
         commandEnd:{
             type: DataTypes.STRING

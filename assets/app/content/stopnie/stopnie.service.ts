@@ -11,9 +11,12 @@ export class StopnieService {
     constructor(private http: Http) {}
 
     add(stopien: Stopien) {
+        const token = localStorage.getItem('token')
+            ? localStorage.getItem('token')
+            : '';
         const body = JSON.stringify(stopien);
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('http://localhost:3000/panel/add', body, {headers: headers})
+        return this.http.post('http://localhost:3000/panel/add' + token, body, {headers: headers})
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json()));
     }
@@ -59,29 +62,19 @@ export class StopnieService {
         const token = localStorage.getItem('token')
             ? '' + localStorage.getItem('token')
             : '';
-        return this.http.delete('http://localhost:3000/panel/delete/' + token + '/' + id)
-            .map((response: Response) => {  
-                const list = response.json().obj;
-                let transformedStopienList: Stopien[] = [];
+        const body = JSON.stringify({id: id});
+        return this.http.delete('http://localhost:3000/panel/delete' + token + '/' + id)
+            .map((response: Response) => response.json())
+            .catch((error: Response) => Observable.throw(error.json()));
+    }
 
-                for (let res of list) {
-                    transformedStopienList.push(new Stopien(
-                        res.name,
-                        res.type,
-                        res.work,
-                        res.dateBegin,
-                        res.commandBegin,
-                        res.dateEnd,
-                        res.commandEnd,
-                        res.guide,
-                        res.whoGive,
-                        res.description,
-                        res.userId,
-                        res.id));
-                }
-                this.stopiens = transformedStopienList;
-                return transformedStopienList;
-            })
+    getStopienById(id: number){
+        const token = localStorage.getItem('token')
+            ? '' + localStorage.getItem('token')
+            : '';
+        const body = JSON.stringify({id: id}); 
+        return this.http.post('http://localhost:3000/panel/getStopienById' + token, {"id": id})
+            .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json()));
     }
 

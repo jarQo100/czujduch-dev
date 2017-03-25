@@ -9,5 +9,6 @@ export const CONTENT_ROUTES: Routes = [
 
     { path: '', component: DashboardComponent },
     { path: 'stopnie', component: StopnieComponent },
-    { path: 'stopnie/dodaj', component: AddStopienComponent }
+    { path: 'stopnie/dodaj', component: AddStopienComponent },
+    { path: 'stopnie/edytuj/:id', component : AddStopienComponent }
 ];
